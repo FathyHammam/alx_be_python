@@ -36,3 +36,41 @@ class Library:
         """Initialize an empty list to store books."""
         self._books = []
 
+    def add_book(self, book):
+        """Add a book to the library collection."""
+        self._books.append(book)
+
+    def check_out_book(self, title):
+        """Check out a book by title."""
+        for book in self._books:
+            if book.title == title:
+                if book.check_out():
+                    print(f"Checked out {book}")
+                    return
+                else:
+                    print(f"{book} is already checked out.")
+                    return
+        print(f"Book with title '{title}' not found.")
+
+    def return_book(self, title):
+        """Return a book by title."""
+        for book in self._books:
+            if book.title == title:
+                if book.return_book():
+                    print(f"Returned {book}")
+                    return
+                else:
+                    print(f"{book} was not checked out.")
+                    return
+        print(f"Book with title '{title}' not found.")
+
+    def list_available_books(self):
+        """List all available books in the library."""
+        available_books = [book for book in self._books if book.is_available()]
+        if available_books:
+            for book in available_books:
+                print(book)
+        else:
+            print("No books are available at the moment.")
+
+
